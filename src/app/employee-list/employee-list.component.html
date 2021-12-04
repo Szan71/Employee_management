@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <h1>{{title}}</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>S.N.</th>
+                <th>Name</th>
+                <th>Code</th>
+                <th>Joined Date</th>
+                <th>Email</th>
+                <th>Gender</th>
+                <th>Address</th>
+                <th>Position</th>
+                <th>Mobile Number</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let employee of Employees">
+                <th scope="row">{{ employee.sn }}</th>
+                <td>{{ employee.name }}</td>
+                <td>{{ employee.code }}</td>
+                <td>{{ employee.joinedDate | date:'yyyy-MMM-dd' }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.gender }}</td>
+                <td>{{ employee.address }}</td>
+                <td>{{ employee.position }}</td>
+                <td>{{ employee.mobile }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
