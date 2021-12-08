@@ -1,45 +1,53 @@
-<div class="container">  
-  <h1>Employee Form</h1>  
-  <form class="col-md-4">  
-    <div class="form-group">  
+<div class="container mt-5" style="max-width: 550px;">
+  <h1>Employee Form</h1>
+  <form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>  
+    {{ userForm.value | json }}
+    <hr>
+    {{ userModel | json }}
+    
+    <div class="form-group"> 
       <label for="Serial Number">S.N.</label>  
-      <input type="text" class="form-control" id="sn" required>  
-    </div>  
+      <input type="text" required class="form-control" name="sn" [(ngModel)]=userModel.sn>  
+    </div>  <br>
     <div class="form-group">  
       <label for="name">Name</label>  
-      <input type="text" class="form-control" id="name" required>  
-    </div> 
+      <input type="text" required  #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control" name="name" [(ngModel)]=userModel.name>
+      <small [class.d-none]="name.valid || name.untouched">Name is required</small>  
+    </div> <br>
     <div class="form-group">  
       <label for="code">Code</label>  
-      <input type="text" class="form-control" id="code" required>  
-    </div> 
+      <input type="text" class="form-control" name="code" [(ngModel)]=userModel.code>  
+    </div> <br>
     <div class="form-group">  
       <label for="joinedDate">Joined Date</label>  
-      <input type="date" class="form-control" id="joinedDate" required>  
-    </div> 
+      <input type="date" class="form-control" name="date" [(ngModel)]=userModel.joinedDate>  
+    </div> <br>
     <div class="form-group">  
       <label for="email">Email</label>  
-      <input type="email" class="form-control" id="name" required>  
-    </div> 
+      <input type="email" class="form-control" name="email" [(ngModel)]=userModel.email>  
+    </div> <br>
     <div class="form-group">  
-      <label for="gender">Gender</label> <br> 
-      <input type="radio" id="male" name="gender" value="Male">
-      <label for="male">Male</label><br>
-      <input type="radio" id="female" name="gender" value="Female">
-      <label for="female">Female</label><br>
-    </div> 
+      <label for="gender">Gender</label><br>
+      <select class="custom-select" name="gender" [(ngModel)]=userModel.gender>
+        <option *ngFor="let gender of genders">{{ gender }}</option>
+      </select> 
+    </div> <br>
     <div class="form-group">  
       <label for="address">Address</label>  
-      <input type="text" class="form-control" id="address" required>  
-    </div> 
+      <input type="text" class="form-control" name="address" [(ngModel)]=userModel.address>  
+    </div> <br>
     <div class="form-group">  
       <label for="position">Position</label>  
-      <input type="text" class="form-control" id="position" required>  
-    </div> 
+      <input type="text" class="form-control" name="position" [(ngModel)]=userModel.position>  
+    </div> <br>
     <div class="form-group">  
       <label for="mobile">Mobile Number</label>  
-      <input type="text" class="form-control" id="mobile" required>  
+      <input type="tel" #mobile="ngModel" pattern="^\d{10}$" required [class.is-invalid]="mobile.invalid && mobile.touched"class="form-control" name="mobile" [(ngModel)]=userModel.mobile >  
+      <div *ngIf="mobile.errors && (mobile.invalid || mobile.touched)">
+        <small class="text-danger" *ngIf="mobile.errors?.['required']">Phone number is required.</small>
+        <small class="text-danger" *ngIf="mobile.errors?.['pattern']">Phone number must be 10 digits.</small>
+    </div>
+      
     </div><br>
-    <button type="submit" class="btn btn-success">Submit</button>  
+    <button [disabled]="userForm.form.invalid" type="submit" class="btn btn-success">Submit</button>  
   </form>  
-</div>

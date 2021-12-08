@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Hero }    from '../hero';  
+import { Employee }    from '../employee';  
 
 @Component({
   selector: 'app-hero-form',
@@ -8,16 +8,17 @@ import { Hero }    from '../hero';
 })
 export class HeroFormComponent implements OnInit {
 
-  submitted = false;  
-  onSubmit() { this.submitted = true; } 
+  genders =['Male', 'Female', 'Others'];
   
-  model = new Hero();
-  // TODO: Remove this when we're done  
-  get diagnostic() { return JSON.stringify(this.model); }  
+  userModel = new Employee(1,'Sujan Khadka', 'Sujan', '2056-07-04', 'khadkasujan7@gmail.com','Male', 'kathmandu', 'hero', 9818056580)
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(){
+    console.log(this.userModel);
   }
 
 }
